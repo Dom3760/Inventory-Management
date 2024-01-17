@@ -30,22 +30,24 @@
 
 import Foundation
 
-class ceral
+class cereal
 {
-    
+    var price=5.49,
 }
 class pancakeMix
 {
     
 }
-class Milk
+class milk
 {
     
 }
-class
+class chips
 {
     
 }
+
+
 print("What would you like to do?:")
 print("1.Add item to cart")
 print("2.Remove item from cart")
@@ -57,19 +59,20 @@ if let input1 = readLine()
 {
     if input1 == "1"
     {
-        print
+        print ("What would you like to add to your cart?")
     }
     if input1 == "2"
     {
         
+        print ("What would you like to remove from the cart?")
     }
     if input1 == "3"
     {
-        
+        print("This is what is currently in stock:")
     }
     if input1 == "4"
     {
-        
+        print("what is your password?")
     }
     if input1 == "5"
     {
