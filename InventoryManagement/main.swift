@@ -8,6 +8,8 @@
 import Foundation
 
 var itemsInCart: [String] = []
+let password1 = "1234"
+
 
 func startScreen ()
 {
@@ -39,6 +41,10 @@ func startScreen ()
         if input1 == "5"
         {
             checkout()
+        }
+        else
+        {
+            startScreen()
         }
     }
 }
@@ -84,6 +90,7 @@ func addItem()
                 {
                     productQuantitys["pancakes"]! -= input1
                     quantityInCart ["pancakes"]! += input1
+                    
                     print("Your current total is: $\(price())")
                     sleep(2)
                     startScreen()
@@ -162,9 +169,9 @@ func removeItem()
     print("3.Milk \(quantityInCart["milk"]!)X Price: $\(productPrices["milk"]!)")
     print("4.Chips \(quantityInCart["chips"]!)X Price: $\(productPrices["chips"]!)")
     print("5. Nevermind")
-    if let input1  = Int(readLine()!)
+    if let selectedItem  = Int(readLine()!)
     {
-        if input1 == 1
+        if selectedItem == 1
         {
             if quantityInCart["pancakes"]! == 0
             {
@@ -199,7 +206,7 @@ func removeItem()
             }
         }
         
-        if input1 == 2
+        if selectedItem == 2
         {
             if quantityInCart["pancakes"]! == 0
             {
@@ -233,7 +240,7 @@ func removeItem()
                 }
             }
         }
-        if input1 == 3
+        if selectedItem == 3
         {
             if quantityInCart["milk"]! == 0
             {
@@ -268,7 +275,7 @@ func removeItem()
                 }
             }
         }
-        if input1 == 4
+        if selectedItem == 4
         {
             if quantityInCart["chips"]! == 0
             {
@@ -301,7 +308,7 @@ func removeItem()
                 }
             }
         }
-        if input1 == 5
+        if selectedItem == 5
         {
             print("Ok")
             sleep(2)
@@ -341,132 +348,197 @@ func checkAvailability()
 
 func adminMenu()
 {
-    let password1 = "1234"
-    print("Hello, What is your password?")
-    if let password2 = readLine()
-    {
-        if password1 == password2
-        {
-            print("welcome Admin, what would you like to do?")
-            print("1. Restock inventory")
-            print("2. Generate report")
-            print("3. Check number of items")
-            print("4. Quit admin menu")
-            
-            if let input2 = Int(readLine()!)
+    var adminMenuChoice = "0"
+    print("Hello what is your password?")
+    
+    if let userPassword = readLine(){
+        if(userPassword == password1){
+            while adminMenuChoice != "4"
             {
-                if input2 == 1
+                print("welcome Admin, what would you like to do?")
+                print("1. Restock inventory")
+                print("2. Generate report")
+                print("3. Check number of items")
+                print("4. Quit admin menu")
+                
+                if let adminMenuChoice = Int(readLine()!)
                 {
-                    print("what would you like to restock?")
-                    print("1. Cereal \(productQuantitys["cereal"]!)X(left)")
-                    print("2. Pancakes \(productQuantitys["pancakes"]!)X(left)")
-                    print("3. Milk \(productQuantitys["milk"]!)X(left)")
-                    print("4. Chips \(productQuantitys["chips"]!)X(left)")
-                    print("5. All items")
-                    print("6. Nevermind")
-                    if let input2 = Int(readLine()!)
+                    if adminMenuChoice == 1
                     {
-                        if input2 == 1
+                        print("what would you like to restock?")
+                        print("1. Cereal \(productQuantitys["cereal"]!)X(left)")
+                        print("2. Pancakes \(productQuantitys["pancakes"]!)X(left)")
+                        print("3. Milk \(productQuantitys["milk"]!)X(left)")
+                        print("4. Chips \(productQuantitys["chips"]!)X(left)")
+                        print("5. All items")
+                        print("6. Nevermind")
+                        if let input2 = Int(readLine()!)
                         {
-                            print("How many would you like to restock?")
-                            if let input1 = Int(readLine()!)
+                            if input2 == 1
                             {
-                                productQuantitys["cereal"]! += input1
+                                print("How many would you like to restock?")
+                                if let input1 = Int(readLine()!)
+                                {
+                                    productQuantitys["cereal"]! += input1
+                                    print("Current stock:\(productQuantitys["cereal"]!)")
+                                    
+                                }else
+                                {
+                                    print("Error")
+                                    continue
+                                }
                             }
-                            print("Current stock:")
-                            print("1. Cereal \(productQuantitys["cereal"]!)X(left)")
-                            print("2. Pancakes \(productQuantitys["pancakes"]!)X(left)")
-                            print("3. Milk \(productQuantitys["milk"]!)X(left)")
-                            print("4. Chips \(productQuantitys["chips"]!)X(left)")
-                            // add this to all too
-                        }
-                        
-                        if input2 == 2
-                        {
-                            print("How many would you like to restock?")
-                            if let input1 = Int(readLine()!)
+                            
+                            if input2 == 2
                             {
-                                productQuantitys["pancakes"]! += input1
+                                print("How many would you like to restock?")
+                                if let input1 = Int(readLine()!)
+                                {
+                                    productQuantitys["pancakes"]! += input1
+                                    print("Current stock:\(productQuantitys["pancakes"]!)")
+                                    
+                                }else
+                                {
+                                    print("Error")
+                                    continue
+                                }
+                            }
+                            
+                            if input2 == 3
+                            {
+                                print("How many would you like to restock?")
+                                if let input1 = Int(readLine()!)
+                                {
+                                    productQuantitys["milk"]! += input1
+                                    print("Current stock:\(productQuantitys["milk"]!)")
+                                }else
+                                {
+                                    print("Error")
+                                    continue
+                                }
+                            }
+                            
+                            if input2 == 4
+                            {
+                                print("How many would you like to restock?")
+                                if let input1 = Int(readLine()!)
+                                {
+                                    productQuantitys["chips"]! += input1
+                                    print("Current stock:\(productQuantitys["chips"]!)")
+                                    continue
+                                    
+                                }else
+                                {
+                                    print("Error")
+                                    continue
+                                }
+                            }
+                            
+                            if input2 == 5
+                            {
+                                print("How many would you like to restock?")
+                                if let quantityToRestock = Int(readLine()!)
+                                {
+                                    productQuantitys["cereal"]! += quantityToRestock
+                                    productQuantitys["pancakes"]! += quantityToRestock
+                                    productQuantitys["milk"]! += quantityToRestock
+                                    productQuantitys["chips"]! += quantityToRestock
+                                    print("1. Cereal \(productQuantitys["cereal"]!)X(left)")
+                                    print("2. Pancakes \(productQuantitys["pancakes"]!)X(left)")
+                                    print("3. Milk \(productQuantitys["milk"]!)X(left)")
+                                    print("4. Chips \(productQuantitys["chips"]!)X(left)")
+                                    sleep (2)
+                                }
+                            }
+                            
+                            if input2 == 6
+                            {
+                                print("ok")
+                                continue
                             }
                         }
+                    }
+                    if adminMenuChoice == 2
+                    {
+                        let stock = productQuantitys["cereal"]! + productQuantitys["pancakes"]! + productQuantitys["milk"]! + productQuantitys["chips"]!
+                        print("Generating Report...")
+                        sleep(1)
+                        print("1. Cereal \(productQuantitys["cereal"]!)X(left)")
+                        print("2. Pancakes \(productQuantitys["pancakes"]!)X(left)")
+                        print("3. Milk \(productQuantitys["milk"]!)X(left)")
+                        print("4. Chips \(productQuantitys["chips"]!)X(left)")
+                        print("total stock:\(stock)")
+                        print("total sales:\(totalSales)")
                         
-                        if input2 == 3
+                        print("would you like to go back to the menu (y/n)?")
+                        if let input1 = readLine()
                         {
-                            print("How many would you like to restock?")
-                            if let input1 = Int(readLine()!)
+                            if input1 == "y"
                             {
-                                productQuantitys["milk"]! += input1
+                                continue
                             }
-                        }
-                        
-                        if input2 == 4
-                        {
-                            print("How many would you like to restock?")
-                            if let input1 = Int(readLine()!)
+                            if input1 == "n"
                             {
-                                productQuantitys["chips"]! += input1
+                                print("Ok, you have 5 seconds.")
+                                sleep(5)
+                                continue
                             }
                             else
                             {
-                                print("") //add this to all
+                                continue
                             }
                         }
                         
-                        if input2 == 5
-                        {
-                            print("How many would you like to restock?")
-                            if let input1 = Int(readLine()!)
-                            {
-                                productQuantitys["cereal"]! += input1
-                                productQuantitys["pancakes"]! += input1
-                                productQuantitys["milk"]! += input1
-                                productQuantitys["chips"]! += input1
-                            }
-                        }
-                        
-                        if input2 == 6
-                        {
-                            print("ok")
-                            adminMenu()
-                        }
+                    }
+                    if adminMenuChoice == 3
+                    {
+                        print("1.Cereal \(productQuantitys["cereal"]!)X(left) Price: $\(productPrices["cereal"]!)")
+                        print("2.Pancakes \(productQuantitys["pancakes"]!)X(left) Price: $\(productPrices["pancakes"]!)")
+                        print("3.Milk \(productQuantitys["milk"]!)X(left) Price: $\(productPrices["milk"]!)")
+                        print("4.Chips \(productQuantitys["chips"]!)X(left) Price: $\(productPrices["chips"]!)")
+                        sleep(2)
+                        continue
+                    }
+                    if adminMenuChoice == 4
+                    {
+                        startScreen()
+                    }
+                    else
+                    {
+                        continue
+                    }
                     }
                 }
-                if input2 == 2
-                {
-                    let stock = productQuantitys["cereal"]! + productQuantitys["pancakes"]! + productQuantitys["milk"]! + productQuantitys["chips"]!
-                    print("Generating Report...")
-                    sleep(1)
-                    print("1. Cereal \(productQuantitys["cereal"]!)X(left)")
-                    print("2. Pancakes \(productQuantitys["pancakes"]!)X(left)")
-                    print("3. Milk \(productQuantitys["milk"]!)X(left)")
-                    print("4. Chips \(productQuantitys["chips"]!)X(left)")
-                    print("total stock:\(stock)")
-                    print("total sales:\(totalSales)")
-                    
-                }
-                if input2 == 3
-                {
-                    print("1.Cereal \(productQuantitys["cereal"]!)X(left) Price: $\(productPrices["cereal"]!)")
-                    print("2.Pancakes \(productQuantitys["pancakes"]!)X(left) Price: $\(productPrices["pancakes"]!)")
-                    print("3.Milk \(productQuantitys["milk"]!)X(left) Price: $\(productPrices["milk"]!)")
-                    print("4.Chips \(productQuantitys["chips"]!)X(left) Price: $\(productPrices["chips"]!)")
-                }
-                if input2 == 4
-                {
-                    print("Thank you admin!")
-                    startScreen()
-                }
             }
-
         }
-        else
-        {
-            print ("Your password is incorrect")
-            sleep(2)
-            startScreen()
+        else{
+        print("Incorrect password! Leaving Admin menu!")
+        return
         }
     }
-}
+    
+//    print("Hello, What is your password?")
+//    if let password2 = readLine()
+//    {
+//        if password1 == password2
+//        {
+//            
+//                if input2 == 4
+//                {
+//                    print("Thank you admin!")
+//                    startScreen()
+//                }
+//            }
+//
+//        }
+//        else
+//        {
+//            print ("Your password is incorrect")
+//            sleep(2)
+//            startScreen()
+//        }
+//    }
+//}
 
 func price() -> Double {
     var finalPrice = 0.0
@@ -480,11 +552,12 @@ func price() -> Double {
 }
 
 var totalSales = 0.0
+var costAfterTax = 0.0
 func checkout ()
 {
     print("calculating total...")
     sleep(1)
-    let costAfterTax = (price() * 0.0925) + price()
+    costAfterTax = (price() * 0.0925) + price()
     print("Items in cart")
     print("1.Cereal \(quantityInCart["cereal"]!)X Price: $\(productPrices["cereal"]!)")
     print("2.Pancakes \(quantityInCart["pancakes"]!)X Price: $\(productPrices["pancakes"]!)")
@@ -498,13 +571,13 @@ func checkout ()
     {
         if input1 == "y"
         {
+            totalSales += costAfterTax
             print("Thank you for your purchase.")
             quantityInCart["cereal"]! = 0
             quantityInCart["pancakes"]! = 0
             quantityInCart["milk"]! = 0
             quantityInCart["chips"]! = 0
             startScreen()
-            totalSales = costAfterTax
             
         }
         if input1 == "n"
